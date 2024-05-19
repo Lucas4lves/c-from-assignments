@@ -52,7 +52,6 @@ int main(){
 	Game * games = initialize_games(GAMES_MAX);
 	int score = 0;	
 	int temp_score_sum = 0;
-	int pause = 0;
 
 	system("clear");
 	for(int a = 0; a < GAMES_MAX; a++){
@@ -65,9 +64,9 @@ int main(){
 		games[a].average_score = (float)temp_score_sum/(float)TEAM_SIZE;
 		printf("Game %d  AVG SCORE: %.2f\n", a + 1, games[a].average_score);
 		printf("Press anything to continue\n");
-		scanf("%d", &pause);
+		while(getc(stdin) != '\n');
 		temp_score_sum = 0;
-		system("clear");
+		//system("clear");
 	}
 	free(games);
 	return 0;
