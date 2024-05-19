@@ -51,7 +51,10 @@ Game * initialize_games(int n){
 int main(){
 	Game * games = initialize_games(GAMES_MAX);
 	int score = 0;	
+	int highest_score = 0;
 	int temp_score_sum = 0;
+
+	int game_index, player_index;
 
 	system("clear");
 	for(int a = 0; a < GAMES_MAX; a++){
@@ -59,14 +62,19 @@ int main(){
 			printf("[GAME %d] Player %d Score: ", a + 1, p + 1);
 			scanf("%d", &score);
 			games[a].players[p].score = score;
+			if(score > highest_score){
+				highest_score = score;
+				player_index = p;
+			}
 			temp_score_sum += score;
 		}
+
+		game_index = a;
+		
 		games[a].average_score = (float)temp_score_sum/(float)TEAM_SIZE;
 		printf("Game %d  AVG SCORE: %.2f\n", a + 1, games[a].average_score);
-		printf("Press anything to continue\n");
-		while(getc(stdin) != '\n');
+		printf("Highest score: from Game %d - Player %d ->  %d\n", game_index + 1 , player_index + 1, highest_score);
 		temp_score_sum = 0;
-		//system("clear");
 	}
 	free(games);
 	return 0;
