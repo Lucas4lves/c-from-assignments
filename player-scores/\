@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TEAM_SIZE 5
+#define GAMES_MAX 5 
+typedef struct{
+	int score;
+}Player;
+
+typedef struct {
+	Player * players;
+}Game;
+
+Player new_player(){
+	Player p;
+	p.score = 0;
+
+	return p;
+}
+
+Game new_game(){
+	Game g;
+	g.players = malloc(sizeof(Player) * TEAM_SIZE);
+
+	for(int n = 0; n < TEAM_SIZE; n++){
+		g.players[n] = new_player();
+	}
+	return g; 
+}
+
+Game * initialize_games(int n){
+	Game * games;
+	games = malloc(sizeof(Game) * n);
+	for(int i = 0; i < n; i++){
+		games[i] = new_game();
+	}
+
+	return games;
+}
+
+int main(){
+	Game * games = initialize_games(GAMES_MAX);
+	int score = 0;	
+
+	for(int a = 0; a < GAMES_MAX; a++){
+		for(int p = 0; p < TEAM_SIZE; p++){
+			printf("[GAME %d] Player %d Score: ", a + 1, p + 1);
+			scanf("%d", &score);
+			games[a].players[p].score = score;
+		}
+		system("clear");
+	}
+	free(games);
+	return 0;
+}
