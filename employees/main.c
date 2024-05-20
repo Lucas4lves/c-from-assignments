@@ -1,14 +1,15 @@
 #include<stdio.h>
+#include<string.h>
 #include<stdlib.h>
 
 #define TEAM_SIZE 2
 
 typedef struct {
-	int 	id;
-	char* 	fName;
-	char* 	lName;
+	int 	id; 
+	char 	fName[50];
+	char 	lName[50];
 	int 	ssn;
-	char * 	title;
+	char 	title[50];
 }Employee;
 
 typedef struct{
@@ -39,10 +40,10 @@ int main(int argc, char* argv[]){
 Employee new_empl(int id, char* first_name, char* last_name, int ssn, char* title){
 	Employee e;
 	e.id = id;
-	e.fName = first_name;
-	e.lName = last_name;
+	strcpy(e.fName, first_name);
+	strcpy(e.lName, last_name);
+	strcpy(e.title, title);
 	e.ssn = ssn;
-	e.title = title;
 
 	return e;
 }
